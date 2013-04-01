@@ -65,8 +65,12 @@ function processClaims (claims, ul) {
         
         switch (valueType) {
             case 'string':
+                // The following are mentioned in the API or extension source code, but not clear on whether active,
+                //   so commenting out until chance to confirm
+                // case 'geocoordinate':  case 'bool': case 'float': case 'int': case 'null': case 'title':
+                // case 'quantity': case 'monolingualtext': case 'multilingualtext': case 'time':
                 dfr = getEntityChildren('property', propID, function (prop) {
-                    dfr.resolve([prop, innerValue, null, propID, null, 'https://commons.wikimedia.org/wiki/Category:']);
+                    dfr.resolve([prop, innerValue, null, propID, null, propID === 373 ? 'https://commons.wikimedia.org/wiki/Category:' : null]);
                 });
                 return dfr;
             case 'wikibase-entityid':
