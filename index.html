@@ -116,11 +116,17 @@ function initialReturn (data) {
 
 function doSearch (name) {
     $.getJSON(baseURL + '/w/api.php?callback=?', getConfigObject('search', name), function (data) {
-        var results = data.query.search;
-        results.sort(function (a, b) {
-            return a.title > b.title;
-        }).forEach(function (result) {
-            getEntityChildren('item', result.title).done(initialReturn);
+        var results = data.query.search,
+            deferreds = $.map(results, function (result) {
+                return getEntityChildren('item', result.title);
+            });
+        $.when.apply($.when, deferreds).done(function () {
+            var arr = $.makeArray(arguments).sort(function (a, b) {
+                return typeof a[0] === 'undefined' ? 1 : // Undefined apparently trips up Firefox into thinking the array is finished
+                    (a[0] === b[0]) ? // If properties are equal, we sort by values
+                    (a[1] > b[1] ? 1 : -1) :
+                    (a[0] > b[0] ? 1 : -1);
+            }).forEach(initialReturn);
         });
     });
 }
