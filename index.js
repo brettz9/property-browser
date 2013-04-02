@@ -1,4 +1,11 @@
 /*globals $*/
+
+/*
+TODOS:
+1) Cause changes in article of language to force reload so as to be bookmarkable (then deal with empty)
+2) Support bi-directional languages
+*/
+
 (function () {
 'use strict';
 
