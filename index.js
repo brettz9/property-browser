@@ -132,9 +132,21 @@ function doSearch (name) {
 $(function () {
 
     // INITIATE AND ATTACH EVENTS
+    ini_set('phpjs.parse_url.mode', 'strict');
+    var purl = parse_url(window.location.href),
+        qk = purl.queryKey,
+        langValue = qk.language || 'en';
+
+    if (qk.article) {
+        $('#startArticle').val(decodeURIComponent(qk.article));
+    }
 
     doSearch($('#startArticle').val());
     $('#startArticle').change(function (e) {
+        // TODO: Implement http_build_url.js for php.js to rebuild URL and redirect for boomarkability
+        // delete purl.query;
+        // delete purl.queryKey;
+
         doSearch(e.target.value);
     });
     
@@ -153,7 +165,7 @@ $(function () {
     $.getJSON(baseURL + '/w/api.php?callback=?', getConfigObject('languages'), function (data) {
         var options = $.map(data.query.languages, function (data) {
             return '<option value="'+ data.code +'">' + data['*'] + '</option>';
-        }).join('').replace('"en"', '"en" selected');
+        }).join('').replace('"' + langValue + '"', '"' + langValue + '" selected');
         $('#languages').append(options);
     });    
 });
