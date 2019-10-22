@@ -24,7 +24,7 @@ function ini_set (varname, newvalue) {
     if (typeof this.dl === 'function') {
       this.dl(newvalue); // This function is only experimental in php.js
     }
-    _setArr(oldval, newvalue);
+    _setArr(oldval);
     break;
   default:
     this.php_js.ini[varname].local_value = newvalue;
