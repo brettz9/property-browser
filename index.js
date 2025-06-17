@@ -44,7 +44,7 @@ function getEntityChildren (contentModel, id, cb) {
         console.log(pages, '::', json);
         var
             claims = json.claims, // Always an empty array if a property?
-            label = json.label[$('#languages').val()];
+            label = json.labels[$('#languages').val()];
 
         if (cb) {
             cb(label, claims);
