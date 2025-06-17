@@ -40,7 +40,9 @@ function getEntityChildren (contentModel, id, cb) {
     $.getJSON(baseURL + '/w/api.php?callback=?', getConfigObject(contentModel, id), function (data) {
         var pages = data.query.pages,
             latestRevision = Object.keys(pages)[0],
-            json = JSON.parse(pages[latestRevision].revisions[0]['*']),
+            json = JSON.parse(pages[latestRevision].revisions[0]['*']);
+        console.log(pages, '::', json);
+        var
             claims = json.claims, // Always an empty array if a property?
             label = json.label[$('#languages').val()];
 
