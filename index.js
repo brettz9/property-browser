@@ -58,7 +58,9 @@ function getEntityChildren (contentModel, id, cb) {
 
 function processClaims (claims, ul) {
     var deferreds = $.map(claims, function (claim) {
+        console.log('claim', claim);
         if (!claim.m || typeof claim.m !== 'object' || claim.m[0] !== 'value') { // Other possibilities to handle?
+            console.log('exiting');
             return;
         }
         var dfr,
