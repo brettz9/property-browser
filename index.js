@@ -41,7 +41,7 @@ function getEntityChildren (contentModel, id, cb) {
         var pages = data.query.pages,
             latestRevision = Object.keys(pages)[0],
             json = JSON.parse(pages[latestRevision].revisions[0]['*']);
-        console.log(pages, '::', json);
+        // console.log(pages, '::', json);
         var
             claims = json.claims, // Always an empty array if a property?
             label = json.labels[$('#languages').val()].value;
@@ -120,7 +120,9 @@ function initialReturn (data) {
         ul = $('<ul>').appendTo(li);
     li.click(function (e) {
         e.stopPropagation();
+        console.log('click1', claims);
         if (!ul.children().length) {
+            console.log('click2', claims);
             processClaims(claims, ul);
         }
     });
