@@ -65,7 +65,7 @@ function processClaims (claims, ul) {
             propID = claim.m[1],
             valueType = claim.m[2],
             innerValue = claim.m[3];
-        
+        console.log(valueType, claim.m);
         switch (valueType) {
             case 'string':
                 // The following are mentioned in the API or extension source code, but not clear on whether active,
@@ -95,7 +95,12 @@ function processClaims (claims, ul) {
                 (a[0] > b[0] ? 1 : -1);
         }).forEach(function (data) {
             var prop = data[0], val = data[1], claims = data[2], propID = data[3], numericID = data[4], commons = data[5],
-                li = $('<li>').appendTo(ul).html('<i><a href="'+baseURL+'/wiki/Property:P'+propID+'">' + prop + '</a></i>' + ': ' + (numericID ? val + ' <small>(<a href="'+baseURL+'/wiki/Q' + numericID + '">' + numericID + '</a>)</small>' : (commons ? '<a href="' + commons + val + '">' + val + '</a>' : val))),
+                li = $('<li>').appendTo(ul).html(
+                    '<i><a href="'+baseURL+'/wiki/Property:P'+propID+'">' + prop + '</a></i>' + ': ' +
+                      (numericID
+                        ? val + ' <small>(<a href="'+baseURL+'/wiki/Q' + numericID + '">' + numericID + '</a>)</small>'
+                        : (commons ? '<a href="' + commons + val + '">' + val + '</a>' : val))
+                ),
                 newUl = $('<ul>').appendTo(li);
             li.click(function (e) {
                 e.stopPropagation();
