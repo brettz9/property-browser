@@ -10,7 +10,7 @@ TODOS:
 (function () {
 'use strict';
 
-var baseURL = 'http://www.wikidata.org';
+var baseURL = 'https://www.wikidata.org';
 
 function getConfigObject (contentModel, id) {
     var prefix;
